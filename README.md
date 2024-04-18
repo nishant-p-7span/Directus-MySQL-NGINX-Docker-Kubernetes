@@ -69,3 +69,7 @@ ALTER TABLE <table_name> CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_a
 ```
 ALTER TABLE <table_name> MODIFY <column_name> VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 ```
+* Create database with prefered collation type.
+```
+CREATE DATABASE db_name CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+```
