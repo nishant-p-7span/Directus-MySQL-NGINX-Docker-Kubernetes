@@ -52,6 +52,12 @@ mysql -uroot -p -P3306 -hipofcontainer
 ```
 
 
+# other commands:
+*command to import dump of the sql
+```
+mysql -u username -p database_name < file.sql
+```
+
 # Advance Section:
 * If Mysql Collation error comes:
 ```
