@@ -30,6 +30,8 @@ ALTER USER 'your_user'@'%' IDENTIFIED WITH mysql_native_password BY 'your_passwo
 ```
 FLUSH PRIVILEGES;
 ```
+# Update:
+* AS MYSQL8 and directus 9 have compatability issue. so switch to mysql5 for smooth database migrations. (you don;t have to do that steps)
 
 ## Here Few things we need to remember.
 * When you are connecting to your local then our container expose to 3307 port with localhost ip
