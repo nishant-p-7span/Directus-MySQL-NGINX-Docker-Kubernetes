@@ -57,6 +57,10 @@ mysql -uroot -p -P3306 -hipofcontainer
 ```
 mysql -u username -p database_name < file.sql
 ```
+* Restoring dump file.
+```
+docker exec -i some-mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < /some/path/on/your/host/all-databases.sql
+```
 
 # Advance Section:
 * If Mysql Collation error comes:
