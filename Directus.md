@@ -13,3 +13,9 @@ docker run -it -p 8055:8055 --name app -e DB_CLIENT=mysql -e DB_HOST=sql_server 
 restart: unless-stopped
 ```
 * Add this to directus coompose file section, so it will restart again and again till we stop container.
+
+## set mysqld default configuration like default collation and character sets:
+* Add this line to docker compose file.
+```
+command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
+```
