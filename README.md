@@ -35,7 +35,7 @@ FLUSH PRIVILEGES;
 
 * Found another solution that, add following line into docker compose while running it.this will solve the error.
 ```
-command: --default-authentication-plugin=mysql_native_password
+command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
 ```
 
 ## Here Few things we need to remember.
