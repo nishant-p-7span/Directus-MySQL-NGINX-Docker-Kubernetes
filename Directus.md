@@ -17,5 +17,5 @@ restart: unless-stopped
 ## set mysqld default configuration like default collation and character sets:
 * Add this line to docker compose file.
 ```
-command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin']
+command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
 ```
