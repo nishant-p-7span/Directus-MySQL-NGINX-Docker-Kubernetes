@@ -33,6 +33,11 @@ FLUSH PRIVILEGES;
 # Update:
 * AS MYSQL8 and directus 9 have compatability issue. so switch to mysql5 for smooth database migrations. (you don;t have to do that steps)
 
+* Found another solution that, add following line into docker compose while running it.this will solve the error.
+```
+command: --default-authentication-plugin=mysql_native_password
+```
+
 ## Here Few things we need to remember.
 * When you are connecting to your local then our container expose to 3307 port with localhost ip
 ```
