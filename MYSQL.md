@@ -76,6 +76,7 @@ mysql -uroot -p -P3306 -hipofcontainer
 
 * You can connect to the local host with ip address of contaner as well.
 > Ip of contaner
+
 > port: 3306
 
 
