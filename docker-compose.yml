@@ -8,6 +8,7 @@ services:
       - 3308:3306
     volumes:
       - ./mysqldump:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
     
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -35,3 +36,6 @@ services:
       - DB_PASSWORD=171726
       - KEY=Hello
       - SECRET=Bye
+
+volumes:
+  mysql:
