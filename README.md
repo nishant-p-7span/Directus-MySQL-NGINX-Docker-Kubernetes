@@ -69,6 +69,15 @@ mysql -u username -p database_name < file.sql
 docker exec -i some-mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < /some/path/on/your/host/all-databases.sql
 ```
 
+## How to import mysql dump to container at start of the container:
+* in docker mysql there is one file called ```docker-entrypoint-initdb.d```. this file will run `.sql`,`.sh`and `.sql.gz` script at start up. 
+* We will store our database dump on our local folder name: `data`
+* Now we will map that folder to location `docker-entrypoint-initdb.d`
+```
+volumes:
+      - ./data:/docker-entrypoint-initdb.d
+```
+* now when mysql will start, it will automatically import this dump file to **Default created database (database create from environment variable)**
 # Advance Section:
 * If Mysql Collation error comes:
 ```
