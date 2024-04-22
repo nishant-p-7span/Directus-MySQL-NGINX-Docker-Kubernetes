@@ -19,3 +19,9 @@ restart: unless-stopped
 ```
 command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
 ```
+
+## Directus issue when migrating database dump.
+* manually install dump and run directus container on it. it will work without error.
+* export dump of that database. Case all the requ. changes are done.
+* now on import this dump on the start up of container and you won't have any error.
+
