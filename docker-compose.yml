@@ -37,5 +37,18 @@ services:
       - KEY=Hello
       - SECRET=Bye
 
+  ngin:
+    container_name: nginx
+    depends_on:
+      - app
+    image: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    links:
+      - app:directus/directus
+
 volumes:
   mysql:
