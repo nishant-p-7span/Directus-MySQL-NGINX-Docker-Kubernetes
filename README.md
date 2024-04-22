@@ -31,9 +31,9 @@ ALTER USER 'your_user'@'%' IDENTIFIED WITH mysql_native_password BY 'your_passwo
 FLUSH PRIVILEGES;
 ```
 # Update:
-* AS MYSQL8 and directus 9 have compatability issue. so switch to mysql5 for smooth database migrations. (you don;t have to do that steps)
+* AS MYSQL8 and directus 10 have compatability issue. so switch to mysql5 for smooth database migrations. (you don't have to do that steps)
 
-* Found another solution that, add following line into docker compose while running it.this will solve the error.
+* Found another solution that, add following line into docker compose while running it.this will solve the error. (This works with mysql8)
 ```
 command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
 ```
@@ -58,6 +58,9 @@ docker run -p 3308:3306 --name app -e MYSQL_ROOT_PASSWORD=root -d --link mysqlse
 mysql -uroot -p -P3306 -hipofcontainer
 ```
 
+* You can connect to the local host with ip address of contaner as well.
+> Ip of contaner
+> port: 3306
 
 # other commands:
 *command to import dump of the sql
