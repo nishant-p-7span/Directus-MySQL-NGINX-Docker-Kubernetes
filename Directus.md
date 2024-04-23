@@ -25,3 +25,35 @@ command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb
 * export dump of that database. Case all the requ. changes are done.
 * now on import this dump on the start up of container and you won't have any error.
 
+# Connecting Directus to AWS S3:
+* First create One s3 bucket and enable public access.
+* go to the bucket policy:
+* Add the policy like this:
+```
+{
+    "Version": "xxxx-xx-xx",
+    "Id": "Policyxxxxxxxx",
+    "Statement": [
+        {
+            "Sid": "Stmtxxxxxx",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::name_of_bucket"
+        }
+    ]
+}
+```
+* create one user, with s3 full access and generate access token.
+* Paste the following env variable to compose file.
+```
+      - STORAGE_LOCATIONS="amazon"
+      - STORAGE_AMAZON_DRIVER="s3"
+      - STORAGE_AMAZON_KEY="nhibataSaktaBro"
+      - STORAGE_AMAZON_SECRET="YetoBilukulBhiNhi"
+      - STORAGE_AMAZON_BUCKET="DeleteHoJayegi-TumDekhoUssePele"
+      - STORAGE_AMAZON_REGION="ap-south-1"
+      - STORAGE_AMAZON_ENDPOINT="https://s3.amazonaws.com"
+      - STORAGE_AMAZON_ROOT="/uploads"
+```
+* it is imortant to add **https://** in `STORAGE_AMAZON_ENDPOINT`, otherwise you will encounter some error.
