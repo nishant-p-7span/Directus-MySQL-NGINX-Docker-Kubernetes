@@ -36,6 +36,14 @@ services:
       - DB_PASSWORD=171726
       - KEY=Hello
       - SECRET=Bye
+      - STORAGE_LOCATIONS="amazon"
+      - STORAGE_AMAZON_DRIVER="s3"
+      - STORAGE_AMAZON_KEY="nhibataSaktaBro"
+      - STORAGE_AMAZON_SECRET="YetoBilukulBhiNhi"
+      - STORAGE_AMAZON_BUCKET="DeleteHoJayegi-TumDekhoUssePele"
+      - STORAGE_AMAZON_REGION="ap-south-1"
+      - STORAGE_AMAZON_ENDPOINT="https://s3.amazonaws.com"
+      - STORAGE_AMAZON_ROOT="/uploads"
 
   ngin:
     container_name: nginx
