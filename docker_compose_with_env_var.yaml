@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  db:
+    container_name: test
+    image: mysql
+    ports:
+      - 3308:3306
+    volumes:
+      - ./mysqldump:/docker-entrypoint-initdb.d
+      - mysql:/var/lib/mysql
+    
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASS}
+      - MYSQL_DATABASE=${DB}
+      - MYSQL_USER=${USER}
+      - MYSQL_PASSWORD=${PASS}
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
+
+  app:
+    container_name: directus
+    depends_on:
+      - db
+    image: directus/directus
+    restart: unless-stopped
+    ports:
+      - 8055:8055
+    links:
+      - db:mysql
+    environment:
+      - DB_CLIENT=mysql
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_DATABASE=${DB}
+      - DB_USER=${USER}
+      - DB_PASSWORD=${PASS}
+      - KEY=Hello
+      - SECRET=Bye
+      - STORAGE_LOCATIONS="amazon"
+      - STORAGE_AMAZON_DRIVER="s3"
+      - STORAGE_AMAZON_KEY="${KEY}"
+      - STORAGE_AMAZON_SECRET="${SECRET}"
+      - STORAGE_AMAZON_BUCKET="${BUCKET}"
+      - STORAGE_AMAZON_REGION="${REGION}"
+      - STORAGE_AMAZON_ENDPOINT="${ENDPOINT}"
+      - STORAGE_AMAZON_ROOT="${ROOT}"
+
+  ngin:
+    container_name: nginx
+    depends_on:
+      - app
+    image: nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    links:
+      - app:directus/directus
+
+volumes:
+  mysql:
