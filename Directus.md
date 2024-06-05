@@ -23,7 +23,7 @@ command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb
 ## Directus issue when migrating database dump.
 * manually install dump and run directus container on it. it will work without error.
 * export dump of that database. Case all the requ. changes are done.
-* now on import this dump on the start up of container and you won't have any error.
+* now on import new dump on the start up of container and you won't have any error.
 
 # Connecting Directus to AWS S3:
 * First create One s3 bucket and enable public access.
