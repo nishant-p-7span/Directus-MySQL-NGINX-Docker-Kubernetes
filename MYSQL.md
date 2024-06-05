@@ -107,8 +107,10 @@ volumes:
 * it is require, otherwise you might encounter that database is not updated with directus user.
 ```
 GRANT ALL PRIVILEGES ON *.* TO 'directus'@'%' WITH GRANT OPTION;
+ALTER USER 'directus'@'%' IDENTIFIED WITH mysql_native_password BY 'pass';
 FLUSH PRIVILEGES;
 ```
+* `ALTER USER 'directus'@'%' IDENTIFIED WITH mysql_native_password BY 'pass';` this is requrired now as newer version of the mysql is not satisfied with `mysqld` set up.
 
 # Attach Directus presistant volume to mysql so data can be stored even after contaner is destroyed.
 * in Compose file, we need to add this line:
