@@ -15,7 +15,7 @@ services:
       - MYSQL_DATABASE=direct
       - MYSQL_USER=directus
       - MYSQL_PASSWORD=171726
-    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--mysql_native_password=ON']
 
   app:
     container_name: directus
