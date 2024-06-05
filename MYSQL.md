@@ -43,7 +43,7 @@ FLUSH PRIVILEGES;
 
 * Found another solution that, add following line into docker compose while running it.this will solve the error. (This works with mysql8)
 ```
-command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
+command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--mysql_native_password=ON']
 ```
 
 
@@ -94,7 +94,8 @@ docker exec -i some-mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD"' < /
 
 
 ## How to import mysql dump to container at start of the container:
-* in docker mysql there is one file called ```docker-entrypoint-initdb.d```. this file will run `.sql`,`.sh`and `.sql.gz` script at start up. 
+* in docker mysql there is one file called ```docker-entrypoint-initdb.d```. this file will run `.sql`,`.sh`and `.sql.gz` script at start up.
+* In `docker-entrypoint-initdb.d`, initialization process start in order of the file name. [1.sql first then 2.sql]
 * We will store our database dump on our local folder name: `data`
 * Now we will map that folder to location `docker-entrypoint-initdb.d`
 ```
