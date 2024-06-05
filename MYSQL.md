@@ -45,7 +45,10 @@ FLUSH PRIVILEGES;
 ```
 command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--mysql_native_password=ON']
 ```
-
+* Older command: ( capable with mysql:8.1.0 )
+```
+command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
+```
 ## Here Few things we need to remember.
 * When you are connecting to your local then our container expose to 3307 port with localhost ip
 ```
