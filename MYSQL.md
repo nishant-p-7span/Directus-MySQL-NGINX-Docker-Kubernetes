@@ -46,7 +46,6 @@ FLUSH PRIVILEGES;
 command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--mysql_native_password=ON']
 ```
 
-
 ## Here Few things we need to remember.
 * When you are connecting to your local then our container expose to 3307 port with localhost ip
 ```
@@ -104,6 +103,12 @@ volumes:
 ```
 * now when mysql will start, it will automatically import this dump file to **Default created database (database create from environment variable)**Attach
 
+## Grant Privileges to directus user created with environment variable.
+* it is require, otherwise you might encounter that database is not updated with directus user.
+```
+GRANT ALL PRIVILEGES ON *.* TO 'directus'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+```
 
 # Attach Directus presistant volume to mysql so data can be stored even after contaner is destroyed.
 * in Compose file, we need to add this line:
