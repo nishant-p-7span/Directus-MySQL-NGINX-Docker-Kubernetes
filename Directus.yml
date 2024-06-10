@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: directus-deploy
+  labels:
+    name: directus-deploy
+    app: fotofizz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: directus-pod
+      app: fotofizz
+  template:
+    metadata:
+      name: directus-pod
+      labels:
+        name: directus-pod
+        app: fotofizz
+    spec:
+      containers:
+        - name: directus
+          image: directus/directus
+          ports:
+            - containerPort: 8055
+          env:
+            - name: DB_CLIENT
+              value: "mysql"
+            - name: DB_HOST
+              value: "mmysql-service"
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_DATABASE
+              value: "direct"
+            - name: DB_USER
+              value: "directus"
+            - name: DB_PASSWORD
+              value: "171726"
+            - name: KEY
+              value: "hello"
+            - name: SECRET
+              value: "Bye"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: directus-service
+  labels:
+    name: directus-service
+    app: fotofizz
+spec:
+  ports:
+  - port: 8055
+    targetPort: 8055
+  selector:
+    name: directus-pod
+    app: fotofizz
