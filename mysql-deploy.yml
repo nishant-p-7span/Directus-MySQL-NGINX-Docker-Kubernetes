@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deploy
+  namespace: default
+  labels:
+    name: database-deploy
+    app: fotofizz
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: database-pod
+      app: fotofizz
+  template:
+    metadata:
+      name: mysql-pod
+      labels:
+        name: database-pod
+        app: fotofizz
+    spec:
+      containers:
+        - name: db
+          image: mysql:8.1.0
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_USER
+              value: "directus"
+            - name: MYSQL_DATABASE
+              value: "direct"
+            - name: MYSQL_PASSWORD
+              value: "171726"
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root"
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "500m"
+          # command: ['mysqld']
+          # args: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_bin', '--default-authentication-plugin=mysql_native_password']
+      #     volumeMounts:
+      #       - name: start-sh
+      #         mountPath: /docker-entrypoint-initdb.d
+      # volumes:
+      #   - name: start-sh
+      #     hostPath:
+      #       path: "/imp/imp"
+      #       type: Directory
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  labels:
+    name: database-service
+    app: fotofizz
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3306
+    targetPort: 3306
+    nodePort: 30006
+  selector:
+    name: database-pod
+    app: fotofizz
